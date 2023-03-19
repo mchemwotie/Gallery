@@ -10,6 +10,16 @@ let image = require('./routes/image');
 // connecting the database
 let mongodb_url = 'mongodb://localhost:27017/';
 let dbName = 'darkroom';
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://mchemwotie:<qVCyAeB6xYWGywGF>@ip6.j7mt3k2.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
 mongoose.connect(`${mongodb_url}${dbName}`,{ useNewUrlParser: true , useUnifiedTopology: true }, (err)=>{
     if (err) console.log(err)
 });
